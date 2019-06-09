@@ -1,6 +1,6 @@
-def mvn = tool (name: 'm3', type: 'maven') + '/bin/mvn'
 pipeline {
     agent any
+    def mvn = tool (name: 'm3', type: 'maven') + '/bin/mvn'
     stages {
         stage('Checkout') {
             steps {
