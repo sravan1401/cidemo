@@ -30,7 +30,7 @@ pipeline {
         stage('Package') {
             steps {
                 echo 'Packaging'
-                sh sh "${tool 'm3'}/bin/mvn -DskipTests"
+                sh "${tool 'm3'}/bin/mvn -DskipTests"
             }
         }
         stage('Deploy') {
