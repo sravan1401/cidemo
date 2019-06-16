@@ -1,6 +1,8 @@
 pipeline {
     agent any
-    def mvn = tool (name: 'm3', type: 'maven') + '/bin/mvn'
+    environment {
+        PROJECT_NAME JAVA
+    }
     stages {
         stage('Checkout') {
             steps {
@@ -10,7 +12,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Clean Build'
-                sh 'mvn clean compile'
+                sh "${tool 'm3'}/bin/mvn clean compile"
             }
         }
         stage('Test') {
@@ -24,20 +26,24 @@ pipeline {
                 echo 'Sonar Scanner'
                	//def scannerHome = tool 'SonarQube Scanner 3.0'
 			    withSonarQubeEnv('sonar67') {
-			    	sh 'mvn sonar:sonar'
+			    	sh "${tool 'm3'}/bin/mvn sonar:sonar"
 			    }
             }
         }
         stage('Package') {
             steps {
                 echo 'Packaging'
-                sh 'mvn package -DskipTests'
+                sh sh "${tool 'm3'}/bin/mvn -DskipTests"
             }
         }
         stage('Deploy') {
             steps {
                 echo '## TODO DEPLOYMENT ##'
             }
+        }
+        stage('Archive Artifact') {
+             archiveArtifacts artifacts: 'build/libs/**/*.jar',
+              fingerprint: true
         }
     }
     
