@@ -15,7 +15,7 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'Testing'
-                sh 'mvn test'
+                sh "${tool 'm3'}/bin/mvn test"
             }
         }
         stage('Sonar Analysis') {
