@@ -1,8 +1,5 @@
 pipeline {
     agent any
-    environment {
-        PROJECT_NAME JAVA
-    }
     stages {
         stage('Checkout') {
             steps {
