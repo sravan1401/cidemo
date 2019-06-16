@@ -39,9 +39,20 @@ pipeline {
             }
         }
         stage('Archive Artifact') {
-            steps{
-              archiveArtifacts artifacts: '**/*.jar',
-              fingerprint: true
+            steps {
+                rtMavenDeployer (
+                    id: "MAVEN_DEPLOYER",
+                    serverId: "ART",
+                    releaseRepo: "libs-release-local",
+                    snapshotRepo: "libs-snapshot-local"
+                )
+
+                rtMavenResolver (
+                    id: "MAVEN_RESOLVER",
+                    serverId: "ART",
+                    releaseRepo: "libs-release",
+                    snapshotRepo: "libs-snapshot"
+                )
             }
         }
     }
