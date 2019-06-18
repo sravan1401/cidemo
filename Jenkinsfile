@@ -58,11 +58,9 @@ pipeline {
                     snapshotRepo: "libs-snapshot-local"
                 )
                 rtMavenRun (
-                    // Tool name from Jenkins configuration.
                     tool: 'm3',
                     pom: 'pom.xml',
                     goals: 'clean install',
-                    // Maven options.
                     opts: '-Xms1024m -Xmx4096m',
                     resolverId: 'MAVEN_RESOLVER'
                     deployerId: 'MAVEN_DEPLOYER',
