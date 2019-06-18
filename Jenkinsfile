@@ -3,6 +3,9 @@ pipeline {
     triggers {
             pollSCM(*/10 * * * *)
         }
+    tools {
+        mvn "m3"
+    }
     stages {
         stage('Checkout') {
             steps {
@@ -11,7 +14,7 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh "${tool 'm3'}/bin/mvn clean compile"
+                sh "mvn clean compile"
             }
         }
         stage('Test') {
