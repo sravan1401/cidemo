@@ -63,7 +63,7 @@ pipeline {
                     goals: 'clean install',
                     opts: '-Xms1024m -Xmx4096m',
                     resolverId: 'MAVEN_RESOLVER'
-                    deployerId: 'MAVEN_DEPLOYER',
+                    deployerId: 'MAVEN_DEPLOYER'
                 )
 
                 
