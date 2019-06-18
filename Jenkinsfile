@@ -1,5 +1,6 @@
 pipeline {
     agent any
+    triggers{pollSCM(*/10 * * * *)}
     stages {
         stage('Checkout') {
             steps {
@@ -40,19 +41,31 @@ pipeline {
         }
         stage('Archive Artifact') {
             steps {
-                rtMavenDeployer (
-                    id: "MAVEN_DEPLOYER",
-                    serverId: "ART",
-                    releaseRepo: "libs-release-local",
-                    snapshotRepo: "libs-snapshot-local"
-                )
-
                 rtMavenResolver (
                     id: "MAVEN_RESOLVER",
                     serverId: "ART",
                     releaseRepo: "libs-release",
                     snapshotRepo: "libs-snapshot"
                 )
+                
+                rtMavenDeployer (
+                    id: "MAVEN_DEPLOYER",
+                    serverId: "ART",
+                    releaseRepo: "libs-release-local",
+                    snapshotRepo: "libs-snapshot-local"
+                )
+                rtMavenRun (
+                    // Tool name from Jenkins configuration.
+                    tool: 'm3',
+                    pom: 'pom.xml',
+                    goals: 'clean install',
+                    // Maven options.
+                    opts: '-Xms1024m -Xmx4096m',
+                    resolverId: 'MAVEN_RESOLVER'
+                    deployerId: 'MAVEN_DEPLOYER',
+                )
+
+                
             }
         }
     }
