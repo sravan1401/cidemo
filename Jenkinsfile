@@ -20,7 +20,7 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'Testing'
-                sh "${tool 'm3'}/bin/mvn test"
+                sh "mvn test"
             }
         }
         stage('Sonar Analysis') {
@@ -28,14 +28,14 @@ pipeline {
                 echo 'Sonar Scanner'
                	//def scannerHome = tool 'SonarQube Scanner 3.0'
 			    withSonarQubeEnv('sonar67') {
-			    	sh "${tool 'm3'}/bin/mvn sonar:sonar"
+			    	sh "mvn sonar:sonar"
 			    }
             }
         }
         stage('Package') {
             steps {
                 echo 'Packaging'
-                sh "${tool 'm3'}/bin/mvn package -DskipTests"
+                sh "mvn package -DskipTests"
             }
         }
         stage('Deploy') {
