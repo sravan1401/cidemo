@@ -26,8 +26,7 @@ pipeline {
         stage('Sonar Analysis') {
             steps {
                 echo 'Sonar Scanner'
-               	//def scannerHome = tool 'SonarQube Scanner 3.0'
-			    withSonarQubeEnv('sonar67') {
+               	withSonarQubeEnv('sonar67') {
 			    	sh "mvn sonar:sonar"
 			    }
             }
