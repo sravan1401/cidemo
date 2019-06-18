@@ -1,6 +1,8 @@
 pipeline {
     agent any
-    triggers{pollSCM(*/10 * * * *)}
+    triggers {
+            pollSCM(*/10 * * * *)
+        }
     stages {
         stage('Checkout') {
             steps {
@@ -9,7 +11,6 @@ pipeline {
         }
         stage('Build') {
             steps {
-                echo 'Clean Build'
                 sh "${tool 'm3'}/bin/mvn clean compile"
             }
         }
