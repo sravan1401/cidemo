@@ -41,9 +41,14 @@ pipeline {
         }
         stage('Archive Artifact') {
             steps {
-                 rtPublishBuildInfo (
-                 serverId: "ART"
+                
+                rtMavenDeployer (
+                    id: "MAVEN_DEPLOYER",
+                    serverId: "ART",
+                    releaseRepo: "libs-release-local",
+                    snapshotRepo: "libs-snapshot-local"
                 )
+                
 
                 rtMavenResolver (
                     id: "MAVEN_RESOLVER",
@@ -52,12 +57,7 @@ pipeline {
                     snapshotRepo: "libs-snapshot"
                 )
                 
-                rtMavenDeployer (
-                    id: "MAVEN_DEPLOYER",
-                    serverId: "ART",
-                    releaseRepo: "libs-release-local",
-                    snapshotRepo: "libs-snapshot-local"
-                )
+                
                 rtMavenRun (
                     tool: 'm3',
                     pom: 'pom.xml',
@@ -67,6 +67,13 @@ pipeline {
                 )
                
                 
+            }
+        }
+        stage('Publish Build Info') {
+            steps {
+                 rtPublishBuildInfo (
+                 serverId: "ART"
+                )
             }
         }
     }
