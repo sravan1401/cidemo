@@ -41,6 +41,10 @@ pipeline {
         }
         stage('Archive Artifact') {
             steps {
+                 rtPublishBuildInfo (
+                 serverId: "ART"
+                )
+
                 rtMavenResolver (
                     id: "MAVEN_RESOLVER",
                     serverId: "ART",
@@ -57,11 +61,11 @@ pipeline {
                 rtMavenRun (
                     tool: 'm3',
                     pom: 'pom.xml',
-                    goals: 'clean install',
+                    goals: 'clean deploy',
                     resolverId: 'MAVEN_RESOLVER',
                     deployerId: 'MAVEN_DEPLOYER'
                 )
-
+               
                 
             }
         }
