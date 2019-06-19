@@ -48,7 +48,7 @@ pipeline {
                     releaseRepo: "libs-release-local",
                     snapshotRepo: "libs-snapshot-local"
                 )
-                
+
 
                 rtMavenResolver (
                     id: "MAVEN_RESOLVER",
@@ -61,7 +61,7 @@ pipeline {
                 rtMavenRun (
                     tool: 'm3',
                     pom: 'pom.xml',
-                    goals: 'clean deploy',
+                    goals: 'deploy',
                     resolverId: 'MAVEN_RESOLVER',
                     deployerId: 'MAVEN_DEPLOYER'
                 )
