@@ -3,6 +3,9 @@ pipeline {
     tools {
         maven "m3"
     }
+    triggers {
+            pollSCM(* * * * *)
+    }
     stages {
         stage('Checkout') {
             steps {
