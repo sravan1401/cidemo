@@ -64,7 +64,7 @@ pipeline {
                 rtMavenRun (
                     tool: 'm3',
                     pom: 'pom.xml',
-                    goals: 'deploy',
+                    goals: 'install',
                     resolverId: 'MAVEN_RESOLVER',
                     deployerId: 'MAVEN_DEPLOYER'
                 )
