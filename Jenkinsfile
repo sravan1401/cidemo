@@ -45,32 +45,32 @@ pipeline {
         stage('Archive Artifact') {
             steps {
                 
-                // rtMavenDeployer (
-                //     id: "MAVEN_DEPLOYER",
-                //     serverId: "ART",
-                //     releaseRepo: "libs-release-local",
-                //     snapshotRepo: "libs-snapshot-local"
-                // )
+                rtMavenDeployer (
+                    id: "MAVEN_DEPLOYER",
+                    serverId: "ART",
+                    releaseRepo: "libs-release-local",
+                    snapshotRepo: "libs-snapshot-local"
+                )
 
 
-                // rtMavenResolver (
-                //     id: "MAVEN_RESOLVER",
-                //     serverId: "ART",
-                //     releaseRepo: "libs-release",
-                //     snapshotRepo: "libs-snapshot"
-                // )
+                rtMavenResolver (
+                    id: "MAVEN_RESOLVER",
+                    serverId: "ART",
+                    releaseRepo: "libs-release",
+                    snapshotRepo: "libs-snapshot"
+                )
                 
                 
-                // rtMavenRun (
-                //     tool: 'm3',
-                //     pom: 'pom.xml',
-                //     goals: 'deploy',
-                //     resolverId: 'MAVEN_RESOLVER',
-                //     deployerId: 'MAVEN_DEPLOYER'
-                // )
-                script {
-                    archive '**/*.jar'
-                }
+                rtMavenRun (
+                    tool: 'm3',
+                    pom: 'pom.xml',
+                    goals: 'deploy',
+                    resolverId: 'MAVEN_RESOLVER',
+                    deployerId: 'MAVEN_DEPLOYER'
+                )
+                // script {
+                //     archive '**/*.jar'
+                // }
                
                 
             }
