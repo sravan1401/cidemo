@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                checkout scm 
+                checkout scm
             }
         }
         stage('Build') {
@@ -44,9 +44,9 @@ pipeline {
         }
         stage('Archive Artifact') {
             steps {
-                
+
                 rtMavenDeployer (
-                    id: "MAVEN_DEPLOYER",
+                    id: "mvn_deployer1",
                     serverId: "ART",
                     releaseRepo: "libs-release-local",
                     snapshotRepo: "libs-snapshot-local"
@@ -54,25 +54,25 @@ pipeline {
 
 
                 rtMavenResolver (
-                    id: "MAVEN_RESOLVER",
+                    id: "mvn_resolver1",
                     serverId: "ART",
                     releaseRepo: "libs-release",
                     snapshotRepo: "libs-snapshot"
                 )
-                
-                
+
+
                 rtMavenRun (
                     tool: 'm3',
                     pom: 'pom.xml',
                     goals: 'install',
-                    resolverId: 'MAVEN_RESOLVER',
-                    deployerId: 'MAVEN_DEPLOYER'
+                    resolverId: 'mvn_resolver1',
+                    deployerId: 'mvn_deployer1'
                 )
                 // script {
                 //     archive '**/*.jar'
                 // }
-               
-                
+
+
             }
         }
         stage('Publish Build Info') {
@@ -83,7 +83,7 @@ pipeline {
             }
         }
     }
-    
+
     post {
         always {
             echo 'JENKINS PIPELINE'
