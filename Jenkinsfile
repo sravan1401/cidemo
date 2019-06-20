@@ -51,7 +51,7 @@ pipeline {
         }
         stage('Archive Artifact') {
             when {
-                  branch=='master'
+                  branch 'master'
             }
             steps {
 
