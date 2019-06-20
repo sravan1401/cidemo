@@ -50,6 +50,9 @@ pipeline {
             }
         }
         stage('Archive Artifact') {
+            when {
+                  branch=='master'
+            }
             steps {
 
                 rtMavenDeployer (
@@ -66,7 +69,6 @@ pipeline {
                     releaseRepo: "libs-release",
                     snapshotRepo: "libs-snapshot"
                 )
-
 
                 rtMavenRun (
                     tool: 'm3',
@@ -88,6 +90,9 @@ pipeline {
                  serverId: "ART"
                 )
             }
+        }
+        stage('Branch Stage') {
+          echo branch
         }
 
     }
