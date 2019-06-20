@@ -23,6 +23,13 @@ pipeline {
                 sh "mvn test"
             }
         }
+        stage('Test Report') {
+          steps {
+              script {
+                junit '**/test-reports/*.xml'
+              }
+          }
+        }
         stage('Sonar Analysis') {
             steps {
                 echo 'Sonar Scanner'
@@ -82,6 +89,7 @@ pipeline {
                 )
             }
         }
+
     }
 
     post {
