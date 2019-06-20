@@ -92,7 +92,9 @@ pipeline {
             }
         }
         stage('Branch Stage') {
-          echo branch
+          steps {
+            echo branch
+          }
         }
 
     }
