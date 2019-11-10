@@ -47,6 +47,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo '## TODO DEPLOYMENT ##'
+                echo 'Add a deployment enviroment'
             }
         }
         stage('Archive Artifact') {
