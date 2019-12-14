@@ -94,6 +94,7 @@ pipeline {
             }
         }
         stage('Promote Build') {
+            steps {
             rtPromote (
             // Mandatory parameter
  
@@ -118,6 +119,7 @@ pipeline {
             // Indicates whether to copy the files. Move is the default.
             copy: true
             )
+          }
         }
         stage('Branch Stage') {
           steps {
