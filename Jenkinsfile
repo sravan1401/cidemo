@@ -92,6 +92,32 @@ pipeline {
                 )
             }
         }
+        stage('Promote Build') {
+            rtPromote (
+            // Mandatory parameter
+ 
+            buildName: '$JOB_NAME',
+            buildNumber: '$BUILD_ID',
+                // Artifactory server ID from Jenkins configuration, or from configuration in the pipeline script
+            serverId: 'ART',
+            // Name of target repository in Artifactory
+            targetRepo: 'libs-release-local',
+ 
+            // Optional parameters
+ 
+            // Comment and Status to be displayed in the Build History tab in Artifactory
+            comment: 'this is the promotion comment',
+            status: 'Released',
+            // Specifies the source repository for build artifacts.
+            sourceRepo: 'libs-snapshot-local',
+            // Indicates whether to promote the build dependencies, in addition to the artifacts. False by default.
+            includeDependencies: true,
+            // Indicates whether to fail the promotion process in case of failing to move or copy one of the files. False by default
+            failFast: true,
+            // Indicates whether to copy the files. Move is the default.
+            copy: true
+            )
+        }
         stage('Branch Stage') {
           steps {
             echo 'branch'
