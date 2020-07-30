@@ -70,7 +70,7 @@ pipeline {
                 )
 
                 rtMavenRun (
-                    tool: 'm3',
+                    tool: 'm3.6',
                     pom: 'pom.xml',
                     goals: 'install',
                     resolverId: 'mvn_resolver1',
