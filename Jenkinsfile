@@ -66,7 +66,7 @@ pipeline {
                     id: "mvn_resolver1",
                     serverId: "ART",
                     releaseRepo: "libs-release-local",
-                    snapshotRepo: "libs-release-local"
+                    snapshotRepo: "libs-snapshot-local"
                 )
 
                 rtMavenRun (
