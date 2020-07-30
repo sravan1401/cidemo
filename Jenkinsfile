@@ -52,9 +52,6 @@ pipeline {
             }
         }
         stage('Archive Artifact') {
-            when {
-                  branch 'master'
-            }
             steps {
 
                 rtMavenDeployer (
