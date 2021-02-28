@@ -1,6 +1,6 @@
     pipeline {
         tools {
-            maven: 'maven3'
+            maven 'maven3'
             jdk: 'jdk8'
         }
         agent {
