@@ -8,11 +8,6 @@
             pollSCM("* * * * *")
         }
         stages {
-            // stage('Prepration') {
-            //     steps {
-            //         cleanWs()
-            //     }
-            // }
             stage('Declarative CheckOut') 
                 steps {
                     sh "echo Checking Out code"
@@ -61,20 +56,17 @@
                         serverId: 'artificatory',
                         releaseRepo: 'pragra-libs-release-local',
                         snapshotRepo: 'pragra-libs-snapshot-local',
-                        threads: 6,
-                        properties: ["branch=${BRANCH_NAME}", 'key2=value2']
-                )
-                rtMavenRun (
-                        // Tool name from Jenkins configuration.
-                        pom: 'pom.xml',
-                        goals: 'install',
-                        // Maven options.
-                        opts: '-Xms1024m -Xmx4096m',
-                        resolverId: 'resolver1',
-                        deployerId: 'deployer1',
-                        buildName: "${JOB_BASE_NAME}",
-                        buildNumber: "${BUILD_NUMBER}"
-                    )
+                        properties: ["branch=${BRANCH_NAME}", 'key2=value2'] )
+                // rtMavenRun (
+                //         pom: 'pom.xml',
+                //         goals: 'install',
+                //         // Maven options.
+                //         opts: '-Xms1024m -Xmx4096m',
+                //         resolverId: 'resolver1',
+                //         deployerId: 'deployer1',
+                //         buildName: "${JOB_BASE_NAME}",
+                //         buildNumber: "${BUILD_NUMBER}"
+                //     )
                 }
             }
 
