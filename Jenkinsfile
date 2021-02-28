@@ -60,7 +60,7 @@
                  rtMavenRun (
                         tool:'maven3',
                         pom: 'pom.xml',
-                        goals: 'install',
+                        goals: 'package',
                         // Maven options.
                         opts: '-Xms1024m -Xmx4096m',
                         resolverId: 'resolver1',
