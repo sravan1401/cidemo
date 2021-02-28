@@ -8,17 +8,17 @@ pipeline {
         pollSCM("* * * * *")
     }
     stages {
-        stage('Prepration') {
-            steps {
-                cleanWs()
-            }
-        }
-        stage('Declarative CheckOut') {
-            steps {
-                sh "echo Checking Out code"
-                checkout scm
-            }
-        }
+        // stage('Prepration') {
+        //     steps {
+        //         cleanWs()
+        //     }
+        // }
+        // stage('Declarative CheckOut') {
+        //     steps {
+        //         sh "echo Checking Out code"
+        //         checkout scm
+        //     }
+        // }
         stage('Compile') {
             steps {
                 sh "mvn clean compile"
