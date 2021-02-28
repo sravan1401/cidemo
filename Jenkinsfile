@@ -36,7 +36,7 @@ pipeline {
         }
         stage('Code Quality Check') {
             steps {
-                withSonarQubeEnv(credentialsId: 'sonar') {
+                withSonarQubeEnv('sonar'){
                     sh "mvn sonar:sonar"
                     // some block
                 }
