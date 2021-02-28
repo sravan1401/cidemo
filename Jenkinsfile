@@ -58,6 +58,7 @@
                         snapshotRepo: 'pragra-libs-snapshot-local',
                         properties: ['key2=value2'] )
                  rtMavenRun (
+                        tool:'maven3'
                         pom: 'pom.xml',
                         goals: 'install',
                         // Maven options.
