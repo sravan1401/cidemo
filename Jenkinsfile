@@ -53,7 +53,7 @@
                         id: 'deployer1',
                         serverId: 'artificatory',
                         releaseRepo: 'libs-release-local',
-                        snapshotRepo: 'libs-snapshot-local',
+                        snapshotRepo: 'libs-snapshot-local'
                  rtMavenRun (
                         tool:'maven3',
                         pom: 'pom.xml',
