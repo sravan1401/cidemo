@@ -47,22 +47,20 @@
                     rtMavenResolver (
                         id: 'resolver1',
                         serverId: 'artificatory',
-                        releaseRepo: 'pragra-libs-release-local',
-                        snapshotRepo: 'pragra-libs-snapshot-local'
+                        releaseRepo: 'libs-release-local',
+                        snapshotRepo: 'libs-snapshot-local'
                     ) 
 
                     rtMavenDeployer (
                         id: 'deployer1',
                         serverId: 'artificatory',
-                        releaseRepo: 'pragra-libs-release-local',
-                        snapshotRepo: 'pragra-libs-snapshot-local',
+                        releaseRepo: 'libs-release-local',
+                        snapshotRepo: 'libs-snapshot-local',
                         properties: ['key2=value2'] )
                  rtMavenRun (
                         tool:'maven3',
                         pom: 'pom.xml',
-                        goals: 'package',
-                        // Maven options.
-                        opts: '-Xms1024m -Xmx4096m',
+                        goals: 'install',
                         resolverId: 'resolver1',
                         deployerId: 'deployer1',
                         buildName: "${JOB_BASE_NAME}",
