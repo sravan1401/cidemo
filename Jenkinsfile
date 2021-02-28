@@ -59,7 +59,7 @@
                         pom: 'pom.xml',
                         goals: 'install',
                         resolverId: 'resolver1',
-                        deployerId: 'deployer1',
+                        deployerId: 'deployer1'
                     )
                 }
             }
