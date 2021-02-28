@@ -8,7 +8,7 @@
             pollSCM("* * * * *")
         }
         stages {
-            stage('Declarative CheckOut') 
+            stage('Declarative CheckOut') {
                 steps {
                     sh "echo Checking Out code"
                     checkout scm
@@ -37,6 +37,39 @@
                     }
                 }
             }
+            stage('Package Application') {
+                steps {
+                    sh "mvn package -DskipTests"
+                }
+            }
+            stage('Publish to Artifactory') {
+                steps {
+                    rtMavenResolver (
+                        id: 'resolver1',
+                        serverId: 'artificatory',
+                        releaseRepo: 'pragra-libs-release-local',
+                        snapshotRepo: 'pragra-libs-snapshot-local'
+                    ) 
+
+                    rtMavenDeployer (
+                        id: 'deployer1',
+                        serverId: 'artificatory',
+                        releaseRepo: 'pragra-libs-release-local',
+                        snapshotRepo: 'pragra-libs-snapshot-local',
+                        properties: ["branch=${BRANCH_NAME}", 'key2=value2'] )
+                 rtMavenRun (
+                        pom: 'pom.xml',
+                        goals: 'install',
+                        // Maven options.
+                        opts: '-Xms1024m -Xmx4096m',
+                        resolverId: 'resolver1',
+                        deployerId: 'deployer1',
+                        buildName: "${JOB_BASE_NAME}",
+                        buildNumber: "${BUILD_NUMBER}"
+                    )
+                }
+            }
+
         }
 
         post {
