@@ -3,11 +3,7 @@
             maven 'maven3'
             jdk 'jdk8'
         }
-        agent {
-            docker {
-                image "maven:3.6.3-jdk-8"
-            }
-        }
+        agent any
         triggers {
             pollSCM("* * * * *")
         }
