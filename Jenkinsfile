@@ -44,12 +44,12 @@
             }
             stage('Publish to Artifactory') {
                 steps {
-                    rtMavenResolver (
-                        id: 'resolver1',
-                        serverId: 'artificatory',
-                        releaseRepo: 'pragra-libs-release-local',
-                        snapshotRepo: 'pragra-libs-snapshot-local'
-                    ) 
+                    // rtMavenResolver (
+                    //     id: 'resolver1',
+                    //     serverId: 'artificatory',
+                    //     releaseRepo: 'pragra-libs-release-local',
+                    //     snapshotRepo: 'pragra-libs-snapshot-local'
+                    // ) 
 
                     // rtMavenDeployer (
                     //     id: 'deployer1',
