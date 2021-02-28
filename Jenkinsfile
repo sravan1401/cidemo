@@ -56,7 +56,7 @@
                         serverId: 'artificatory',
                         releaseRepo: 'pragra-libs-release-local',
                         snapshotRepo: 'pragra-libs-snapshot-local',
-                        properties: ["branch=${BRANCH_NAME}", 'key2=value2'] )
+                        properties: ['key2=value2'] )
                  rtMavenRun (
                         pom: 'pom.xml',
                         goals: 'install',
