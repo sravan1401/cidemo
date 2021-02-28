@@ -4,9 +4,7 @@
             jdk 'jdk8'
         }
         agent any
-        triggers {
-            pollSCM("* * * * *")
-        }
+    
         stages {
             stage('Declarative CheckOut') {
                 steps {
@@ -56,15 +54,12 @@
                         serverId: 'artificatory',
                         releaseRepo: 'libs-release-local',
                         snapshotRepo: 'libs-snapshot-local',
-                        properties: ['key2=value2'] )
                  rtMavenRun (
                         tool:'maven3',
                         pom: 'pom.xml',
                         goals: 'install',
                         resolverId: 'resolver1',
                         deployerId: 'deployer1',
-                        buildName: "${JOB_BASE_NAME}",
-                        buildNumber: "${BUILD_NUMBER}"
                     )
                 }
             }
