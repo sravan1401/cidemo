@@ -1,6 +1,6 @@
     pipeline {
         tools {
-            maven 'maven3'
+            maven 'm3'
             jdk 'jdk8'
         }
         agent any
@@ -30,8 +30,8 @@
             stage('Code Quality Check') {
                 steps {
                     withSonarQubeEnv('sonar'){
-                        sh "mvn sonar:sonar"
-                        // some block
+                        sh 'mvn verify sonar:sonar -Dsonar.projectName=PragraDemo -Dsonar.projectKey=PRAGRA1 -Dsonar.projectVersion=$BUILD_NUMBER'
+                       // some block
                     }
                 }
             }
