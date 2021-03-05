@@ -41,6 +41,7 @@
                 }
             }
             stage('Generic Artificatory') {
+                steps {
                 rtUpload (
                         serverId: 'art1',
                         spec: '''{
@@ -63,6 +64,7 @@
                         buildName: '$JOB_NAME',
                         buildNumber: '$BUILD_NUMBER'
                  )
+                }
             }
             // stage('Publish to Artifactory') {
             //     steps {
