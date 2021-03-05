@@ -48,11 +48,11 @@
                             "files": [
                                 {
                                 "pattern": "target/ci-pipeline-pragra-0.0.1.jar",
-                                "target": "pragra-ci-demo/${BUILD_NUMBER}"
+                                "target": "libs-snapshot-local/pragra-ci-demo/${BUILD_NUMBER}"
                                 },
                                 {
                                 "pattern": "pom.xml",
-                                "target": "pragra-ci-demo/${BUILD_NUMBER}"
+                                "target": "libs-snapshot-local/pragra-ci-demo/${BUILD_NUMBER}"
                                 }
                             ]
                         }''',
@@ -69,7 +69,7 @@
             stage('Promote Build') {
                 steps {
                     withCredentials([usernameColonPassword(credentialsId: 'artificatory', variable: 'logindata')]) {
-                     sh 'curl -u${logindata} -X PUT "http://192.168.50.101:8081/artifactory/api/storage/pragra-ci-demo/${BUILD_NUMBER}/ci-pipeline-pragra-0.0.1.jar?properties=Promoted=Yes"'
+                     sh 'curl -u${logindata} -X PUT "http://192.168.50.101:8081/artifactory/api/storage/libs-snapshot-local/pragra-ci-demo/${BUILD_NUMBER}/ci-pipeline-pragra-0.0.1.jar?properties=Promoted=Yes"'
                  }
               }
             }
