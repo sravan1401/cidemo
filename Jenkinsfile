@@ -40,30 +40,54 @@
                     sh "mvn package -DskipTests"
                 }
             }
-            stage('Publish to Artifactory') {
-                steps {
-                    rtMavenResolver (
-                        id: 'resolver1',
+            stage('Generic Artificatory') {
+                rtUpload (
                         serverId: 'art1',
-                        releaseRepo: 'libs-release-local',
-                        snapshotRepo: 'libs-snapshot-local'
-                    ) 
-
-                    rtMavenDeployer (
-                        id: 'deployer1',
-                        serverId: 'art1',
-                        releaseRepo: 'libs-release-local',
-                        snapshotRepo: 'libs-snapshot-local'
-                    )
-                 rtMavenRun (
-                        tool:'m3',
-                        pom: 'pom.xml',
-                        goals: 'install',
-                        resolverId: 'resolver1',
-                        deployerId: 'deployer1'
-                    )
-                }
+                        spec: '''{
+                            "files": [
+                                {
+                                "pattern": "target/ci-pipeline-pragra-0.0.1.jar",
+                                "target": "libs-snapshot-local/pragra-ci-demo/"
+                                },
+                                {
+                                "pattern": "pom.xml",
+                                "target": "libs-snapshot-local/pragra-ci-demo/"
+                                }
+                            ]
+                        }''',
+                    
+                        // Optional - Associate the uploaded files with the following custom build name and build number,
+                        // as build artifacts.
+                        // If not set, the files will be associated with the default build name and build number (i.e the
+                        // the Jenkins job name and number).
+                        buildName: '$JOB_NAME',
+                        buildNumber: '$BUILD_NUMBER'
+                 )
             }
+            // stage('Publish to Artifactory') {
+            //     steps {
+            //         rtMavenResolver (
+            //             id: 'resolver1',
+            //             serverId: 'art1',
+            //             releaseRepo: 'libs-release-local',
+            //             snapshotRepo: 'libs-snapshot-local'
+            //         ) 
+
+            //         rtMavenDeployer (
+            //             id: 'deployer1',
+            //             serverId: 'art1',
+            //             releaseRepo: 'libs-release-local',
+            //             snapshotRepo: 'libs-snapshot-local'
+            //         )
+            //      rtMavenRun (
+            //             tool:'m3',
+            //             pom: 'pom.xml',
+            //             goals: 'install',
+            //             resolverId: 'resolver1',
+            //             deployerId: 'deployer1'
+            //         )
+            //     }
+            // }
 
         }
 
