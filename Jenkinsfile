@@ -69,7 +69,7 @@
             stage('Promote Build') {
                 steps {
                     withCredentials([usernameColonPassword(credentialsId: 'artificatory', variable: 'logindata')]) {
-                     sh 'curl -u${logindata}' -X PUT "http://192.168.50.101:8081/artifactory/api/storage/pragra-ci-demo/${BUILD_NUMBER}/ci-pipeline-pragra-0.0.1.jar?properties=Promoted=Yes"'
+                     sh 'curl -u${logindata} -X PUT "http://192.168.50.101:8081/artifactory/api/storage/pragra-ci-demo/${BUILD_NUMBER}/ci-pipeline-pragra-0.0.1.jar?properties=Promoted=Yes"';
                 }
             }
             // stage('Publish to Artifactory') {
