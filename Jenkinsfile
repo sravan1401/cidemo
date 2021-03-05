@@ -56,7 +56,7 @@
                         snapshotRepo: 'libs-snapshot-local'
                     )
                  rtMavenRun (
-                        tool:'maven3',
+                        tool:'m3',
                         pom: 'pom.xml',
                         goals: 'install',
                         resolverId: 'resolver1',
