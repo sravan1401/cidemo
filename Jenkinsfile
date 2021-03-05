@@ -29,7 +29,7 @@
             }
             stage('Code Quality Check') {
                 steps {
-                    withSonarQubeEnv('sonar'){
+                    withSonarQubeEnv('sonarqube'){
                         sh 'mvn verify sonar:sonar -Dsonar.projectName=PragraDemo -Dsonar.projectKey=PRAGRA1 -Dsonar.projectVersion=$BUILD_NUMBER'
                        // some block
                     }
