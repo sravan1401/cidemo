@@ -48,11 +48,11 @@
                             "files": [
                                 {
                                 "pattern": "target/ci-pipeline-pragra-0.0.1.jar",
-                                "target": "libs-snapshot-local/pragra-ci-demo/"
+                                "target": "pragra-ci-demo/${BUILD_NUMBER}"
                                 },
                                 {
                                 "pattern": "pom.xml",
-                                "target": "libs-snapshot-local/pragra-ci-demo/"
+                                "target": "pragra-ci-demo/${BUILD_NUMBER}"
                                 }
                             ]
                         }''',
@@ -61,9 +61,15 @@
                         // as build artifacts.
                         // If not set, the files will be associated with the default build name and build number (i.e the
                         // the Jenkins job name and number).
-                        buildName: '$JOB_NAME',
-                        buildNumber: '$BUILD_NUMBER'
+                        buildName: "${JOB_NAME}",
+                        buildNumber: "${BUILD_NUMBER}"
                  )
+                }
+            }
+            stage('Promote Build') {
+                steps {
+                    withCredentials([usernameColonPassword(credentialsId: 'artificatory', variable: 'logindata')]) {
+                     sh 'curl -u${logindata}' -X PUT "http://192.168.50.101:8081/artifactory/api/storage/pragra-ci-demo/${BUILD_NUMBER}/ci-pipeline-pragra-0.0.1.jar?properties=Promoted=Yes"'
                 }
             }
             // stage('Publish to Artifactory') {
