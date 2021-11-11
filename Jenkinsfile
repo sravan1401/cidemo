@@ -3,6 +3,9 @@
             maven 'm3'
             jdk 'jdk11'
         }
+        enviroment {
+            SONAR_TOKEN=73cb35a3844db74047491e490e3d3a59c1718bd4
+        }
         agent any
     
         stages {
@@ -35,44 +38,44 @@
                     }
                 }
             }
-            stage('Package Application') {
-                steps {
-                    sh "mvn package -DskipTests"
-                }
-            }
-            stage('Generic Artificatory') {
-                steps {
-                rtUpload (
-                        serverId: 'art1',
-                        spec: '''{
-                            "files": [
-                                {
-                                "pattern": "target/ci-pipeline-pragra-0.0.1.jar",
-                                "target": "libs-snapshot-local/pragra-ci-demo/${BUILD_NUMBER}"
-                                },
-                                {
-                                "pattern": "pom.xml",
-                                "target": "libs-snapshot-local/pragra-ci-demo/${BUILD_NUMBER}"
-                                }
-                            ]
-                        }''',
+//             stage('Package Application') {
+//                 steps {
+//                     sh "mvn package -DskipTests"
+//                 }
+//             }
+//             stage('Generic Artificatory') {
+//                 steps {
+//                 rtUpload (
+//                         serverId: 'art1',
+//                         spec: '''{
+//                             "files": [
+//                                 {
+//                                 "pattern": "target/ci-pipeline-pragra-0.0.1.jar",
+//                                 "target": "libs-snapshot-local/pragra-ci-demo/${BUILD_NUMBER}"
+//                                 },
+//                                 {
+//                                 "pattern": "pom.xml",
+//                                 "target": "libs-snapshot-local/pragra-ci-demo/${BUILD_NUMBER}"
+//                                 }
+//                             ]
+//                         }''',
                     
-                        // Optional - Associate the uploaded files with the following custom build name and build number,
-                        // as build artifacts.
-                        // If not set, the files will be associated with the default build name and build number (i.e the
-                        // the Jenkins job name and number).
-                        buildName: "${JOB_NAME}",
-                        buildNumber: "${BUILD_NUMBER}"
-                 )
-                }
-            }
-            stage('Promote Build') {
-                steps {
-                    withCredentials([usernameColonPassword(credentialsId: 'artificatory', variable: 'logindata')]) {
-                     sh 'curl -u${logindata} -X PUT "http://192.168.50.101:8081/artifactory/api/storage/libs-snapshot-local/pragra-ci-demo/${BUILD_NUMBER}/ci-pipeline-pragra-0.0.1.jar?properties=Promoted=Yes"'
-                 }
-              }
-            }
+//                         // Optional - Associate the uploaded files with the following custom build name and build number,
+//                         // as build artifacts.
+//                         // If not set, the files will be associated with the default build name and build number (i.e the
+//                         // the Jenkins job name and number).
+//                         buildName: "${JOB_NAME}",
+//                         buildNumber: "${BUILD_NUMBER}"
+//                  )
+//                 }
+//             }
+//             stage('Promote Build') {
+//                 steps {
+//                     withCredentials([usernameColonPassword(credentialsId: 'artificatory', variable: 'logindata')]) {
+//                      sh 'curl -u${logindata} -X PUT "http://192.168.50.101:8081/artifactory/api/storage/libs-snapshot-local/pragra-ci-demo/${BUILD_NUMBER}/ci-pipeline-pragra-0.0.1.jar?properties=Promoted=Yes"'
+//                  }
+//               }
+//             }
             // stage('Publish to Artifactory') {
             //     steps {
             //         rtMavenResolver (
