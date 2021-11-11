@@ -16,10 +16,8 @@
 
     <properties>
         <java.version>1.8</java.version>
-        <sonar.projectKey>opencellsoft_core</sonar.projectKey>
-        <sonar.moduleKey>${project.groupId}:${project.artifactId}</sonar.moduleKey>
-        <sonar.organization>opencellsoft</sonar.organization>
-        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+       <sonar.organization>sravan1401</sonar.organization>
+       <sonar.host.url>https://sonarcloud.io</sonar.host.url>
      </properties>
     <dependencies>
         <dependency>
