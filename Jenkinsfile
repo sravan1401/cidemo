@@ -3,9 +3,7 @@
             maven 'm3'
             jdk 'jdk11'
         }
-        enviroment {
-            SONAR_TOKEN=73cb35a3844db74047491e490e3d3a59c1718bd4
-        }
+       
         agent any
     
         stages {
